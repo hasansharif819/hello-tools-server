@@ -9,7 +9,7 @@ import { Blogs } from '../Blogs/blogs.model';
 
 
 const createCommentsIntoDB = async (userData: JwtPayload, payload: TComments) => {
-  const userEmail = userData.email;
+  const userEmail = userData.email || payload.email;
 
   const user = await User.findOne({ email: userEmail });
 
@@ -27,9 +27,9 @@ const createCommentsIntoDB = async (userData: JwtPayload, payload: TComments) =>
 
   const payloadWithUserData = {
     ...payload,
-    name: user.name,
-    email: user.email,
-    img: user.img,
+    name: user.name || payload.name,
+    email: user.email || payload.email,
+    img: user.img || payload.img,
     commenterId: user._id,
   };
 
