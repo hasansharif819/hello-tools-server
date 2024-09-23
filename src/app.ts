@@ -27,7 +27,7 @@ app.use(
 app.use('/api/v1', router);
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Welcome to Hello Tools Server!!!');
+  res.send('Welcome to Hello Tools Server. Please stay with us!!!');
 });
 
 app.use(globalErrorHandler);
