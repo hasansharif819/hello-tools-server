@@ -4,7 +4,7 @@ import sendResponse from '../../utils/sendResponse';
 import { CommentsServices } from './comments.service';
 
 const createComments = catchAsync(async (req, res) => {
-  const result = await CommentsServices.createCommentsIntoDB(req.user, req.body);
+  const result = await CommentsServices.createCommentsIntoDB(req.body);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

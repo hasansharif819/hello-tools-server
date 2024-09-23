@@ -8,14 +8,12 @@ import { User } from '../User/user.model';
 import { Blogs } from '../Blogs/blogs.model';
 
 
-const createCommentsIntoDB = async (userData: JwtPayload, payload: TComments) => {
-  const userEmail = userData.email || payload.email;
+const createCommentsIntoDB = async (payload: TComments) => {
+  const userEmail = payload.email;
+
+  // console.log("userData = ", userData)
 
   const user = await User.findOne({ email: userEmail });
-
-  if(!user){
-    throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized for comment');
-  }
 
   const blogId = payload.blogId;
 
@@ -27,10 +25,10 @@ const createCommentsIntoDB = async (userData: JwtPayload, payload: TComments) =>
 
   const payloadWithUserData = {
     ...payload,
-    name: user.name || payload.name,
-    email: user.email || payload.email,
-    img: user.img || payload.img,
-    commenterId: user._id,
+    name: user?.name || payload.name,
+    email: user?.email || payload.email,
+    img: user?.img || payload.img,
+    commenterId: user?._id || null,
   };
 
   const result = await Comments.create(payloadWithUserData);
