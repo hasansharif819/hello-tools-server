@@ -17,7 +17,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: ['http://localhost:5173', 'https://hello-tools-4fde3.web.app', 'http://localhost:3000/'],
+    origin: ['http://localhost:5173', 'https://hello-tools-4fde3.web.app', 'http://localhost:3000'],
     credentials: true,
   })
 );
