@@ -7,14 +7,14 @@ import { User } from '../User/user.model';
 import { Products } from '../Product/product.model';
 
 
-const createCartsIntoDB = async (userData: JwtPayload, payload: TCarts) => {
-  const userId = userData._id;
+const createCartsIntoDB = async (payload: TCarts) => {
+  const userEmail = payload.email;
 
-  const user = await User.findOne({ id: userId });
+  const user = await User.findOne({ email: userEmail });
 
-  if(!user){
-    throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized. Please login');
-  }
+  // if(!user){
+  //   throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized. Please login');
+  // }
 
   const pId = payload.productId;
   const product = await Products.findOne({ _id: pId });
@@ -23,34 +23,34 @@ const createCartsIntoDB = async (userData: JwtPayload, payload: TCarts) => {
     throw new AppError(httpStatus.BAD_REQUEST, 'This product is not available');
   }
 
-  const totalAmountofPrice = (product.price * payload.quantity);
+  // const totalAmountofPrice = (product.price * payload.quantity);
 
-  const payloadWithData = {
-    name: user.name,
-    email: user.email,
-    userId: userId,
-    productName: product.name,
-    unitPrice: product.price,
-    pImg: product.img,
-    quantity: payload.quantity,
-    productId: payload.productId,
-    totalPrice: totalAmountofPrice,
-  };
+  // const payloadWithData = {
+  //   name: user.name,
+  //   email: user.email,
+  //   userId: userId,
+  //   productName: product.name,
+  //   unitPrice: product.price,
+  //   pImg: product.img,
+  //   quantity: payload.quantity,
+  //   productId: payload.productId,
+  //   totalPrice: totalAmountofPrice,
+  // };
 
-  const result = await Carts.create(payloadWithData);
+  const result = await Carts.create(payload);
   return result;
 };
 
 const updateCartsIntoDB = async (id: string, userData: JwtPayload, payload: Partial<TCarts>) => {
 
-  const uId = userData._id;
+  const userEmail = payload.email;
   const cart = await Carts.findById(id);
 
   if(!cart){
     throw new AppError(httpStatus.BAD_REQUEST, 'This cart is not available for edit')
   }
 
-  if(uId !== cart.userId){
+  if(userEmail !== cart.email){
     throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized to edit this cart');
   }
 

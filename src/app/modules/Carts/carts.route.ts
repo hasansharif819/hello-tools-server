@@ -9,33 +9,33 @@ const router = express.Router();
 
 router.post(
   '/create-cart',
-  // auth(USER_ROLE.admin, USER_ROLE.user),
+  auth(USER_ROLE.admin, USER_ROLE.user),
   validateRequest(CartsValidations.createCartsValidationSchema),
   CartsControllers.createCarts,
 );
 
 router.patch(
   '/:id',
-  // auth(USER_ROLE.admin, USER_ROLE.user),
+  auth(USER_ROLE.admin, USER_ROLE.user),
   validateRequest(CartsValidations.updateCartsValidationSchema),
   CartsControllers.updateCarts,
 );
 
 router.get(
   '/:id',
-  // auth(USER_ROLE.admin, USER_ROLE.user),
+  auth(USER_ROLE.admin, USER_ROLE.user),
   CartsControllers.getSingleCart,
 );
 
 router.get(
   '/',
-  // auth(USER_ROLE.admin, USER_ROLE.user),
+  auth(USER_ROLE.admin, USER_ROLE.user),
   CartsControllers.getAllCarts,
 );
 
 router.delete(
   '/:id',
-  // auth(USER_ROLE.admin, USER_ROLE.user),
+  auth(USER_ROLE.admin, USER_ROLE.user),
   CartsControllers.deleteCart,
 );
 
