@@ -11,7 +11,7 @@ const createUserIntoDB = async (payload: TUser) => {
   //if password is not given , use deafult password
   userData.password = payload.password || (config.default_password as string);
 
-  userData.role = payload.role;
+  userData.role = 'user';
   userData.email = payload.email;
   userData.name = payload.name;
   userData.gender = payload.gender;
