@@ -3,25 +3,25 @@ import { Carts } from './carts.model';
 import AppError from '../../errors/AppError';
 import httpStatus from 'http-status';
 import { JwtPayload } from 'jsonwebtoken';
-import { User } from '../User/user.model';
-import { Products } from '../Product/product.model';
+// import { User } from '../User/user.model';
+// import { Products } from '../Product/product.model';
 
 
-const createCartsIntoDB = async (payload: TCarts) => {
-  const userEmail = payload.email;
+const createCartsIntoDB = async (userData: JwtPayload, payload: TCarts) => {
+  // const userEmail = payload.email;
 
-  const user = await User.findOne({ email: userEmail });
+  // const user = await User.findOne({ email: userEmail });
 
   // if(!user){
   //   throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized. Please login');
   // }
 
-  const pId = payload.productId;
-  const product = await Products.findOne({ _id: pId });
+  // const pId = payload.productId;
+  // const product = await Products.findOne({ _id: pId });
 
-  if(!product){
-    throw new AppError(httpStatus.BAD_REQUEST, 'This product is not available');
-  }
+  // if(!product){
+  //   throw new AppError(httpStatus.BAD_REQUEST, 'This product is not available');
+  // }
 
   // const totalAmountofPrice = (product.price * payload.quantity);
 
