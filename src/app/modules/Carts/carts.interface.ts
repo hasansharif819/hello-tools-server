@@ -9,6 +9,6 @@ export type TCarts = {
   quantity: number;
   totalPrice: number;
   productId: Types.ObjectId;
-  userId: Types.ObjectId;
+  userId?: Types.ObjectId;
   isDeleted?: boolean;
 };
